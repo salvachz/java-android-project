@@ -137,13 +137,13 @@ public class WebService{
         }
  
         httpGet = new HttpGet(getUrl);
-        Log.e("WebGetURL: ",getUrl);
+        Log.e("WebGetURL1: ",getUrl);
  
         try {
             response = httpClient.execute(httpGet);
-            Log.e("CUÂMARELO", "oi");
+            Log.e("nao", response.getEntity().toString());
         } catch (Exception e) {
-            Log.e("Groshie:", e.getMessage());
+            Log.e("Groshie:", "erro");
         }
  
         // we assume that the response body contains the error message
@@ -174,11 +174,13 @@ public class WebService{
 			e1.printStackTrace();
 		} 
 
-        Log.e("WebGetURL: ",getUrl);
+        Log.e("WebGetURL2: ",getUrl);
         
         
         try {
+        	Log.e("sim", response.toString());
             response = httpClient.execute(httpPost);
+            
         } catch (Exception e) {
             Log.e("Groshie:", e.getMessage());
         }

@@ -3,9 +3,16 @@ package com.example.restaurante;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.sf.json.JSONException;
+
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -19,6 +26,19 @@ public class MainActivity extends Activity implements OnClickListener {
 	private EditText login;
 	private EditText senha;
 	private TextView teste;
+	private Handler handlerLogin = new Handler(){
+    	
+    	public void handleMessage(Message msg){
+    		Bundle bundle = msg.getData();
+    		Boolean status = bundle.getBoolean("status");
+    		if(status){
+    			Intent it = new Intent(MainActivity.this, MenuPrincipal.class);
+    			startActivity(it);
+    		}else
+    			Toast.makeText(MainActivity.this, "usuario/senha nao encontrados", Toast.LENGTH_LONG).show();
+    	}
+	};
+	
 	
     /** Called when the activity is first created. */
     @Override
@@ -28,23 +48,17 @@ public class MainActivity extends Activity implements OnClickListener {
 	    btnEntrar = (Button) findViewById(R.id.btnEntrar);
 	    btnEntrar.setOnClickListener(this);
     }
+    
+    
 	@Override
 	public void onClick(View view) {
+		Bundle bundle = new Bundle();
 		login = (EditText) findViewById(R.id.loginBox);
 		senha = (EditText) findViewById(R.id.pwdBox);
-				WebService ws = new WebService("http://salvachz.com.br/restaurante/");
-				Map params2 = new HashMap(); 
-				params2.put("user", "erik");
-				params2.put("passwd", "maromba");
-				String bla = ws.webGet("login.php", params2);
-				//System.out.println(bla);
-
-		String log = String.valueOf(login.getText());
-		String pwd = String.valueOf(senha.getText());
-		
-		// Toast para login incorreto:
-		//Intent i = null;
-		//i = new Intent(this, MenuPrincipal.class);
-		//startActivity(i);
+		LoginThread loginThread = new LoginThread(login.getText().toString(),
+				senha.getText().toString(),
+				handlerLogin);
+		loginThread.start();
 	}
 }
+	
