@@ -1,0 +1,69 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.restaurante.DetalhesProduto"
+    android:background="@color/varBkg"
+     >
+       
+	
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        />
+
+    <TextView
+        android:id="@+id/nome"
+        android:layout_width="120dip"
+        android:layout_height="35dip"
+        android:layout_below="@id/img"
+        android:layout_marginLeft="40dp"
+        android:textColor="#000000" />
+
+
+    <EditText
+        android:id="@+id/fieldQtd"
+        android:layout_width="80dip"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/preco"
+        android:layout_below="@+id/nome"
+        android:layout_marginLeft="40dp"
+        android:background="@android:drawable/editbox_background"
+        android:ems="10"
+        android:inputType="number"
+        android:textColor="#000000" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/btnFinaliza"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignLeft="@+id/preco"
+        android:layout_centerVertical="true"
+        android:layout_below="@id/fieldQtd"
+        android:onClick="onClick"
+        android:text="Finalizar"
+        android:textColor="#000000" />
+    <TextView
+        android:id="@+id/qtd"
+        android:layout_width="80dip"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/fieldQtd"
+        android:layout_alignBottom="@+id/fieldQtd"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="42dp"
+        android:text="Quantidade:"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/preco"
+        android:layout_width="120dip"
+        android:layout_height="35dip"
+        android:layout_below="@+id/img"
+        android:layout_toRightOf="@+id/nome"
+        android:textColor="#000000" />
+
+</RelativeLayout>

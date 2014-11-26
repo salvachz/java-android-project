@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">restaurante</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="login">Login:</string>
+    <string name="senha">Senha:</string>
+    <string name="msgLogin">Digite seu login e senha.</string>
+    <string name="title_activity_menu_principal">MenuPrincipal</string>
+    <string name="title_activity_lista_produtos">ListaProdutos</string>
+    <string name="title_activity_list_cell">ListCell</string>
+    <string name="title_activity_detalhes_produto">DetalhesProduto</string>
+    <string name="title_activity_lista_pedido">ListaPedido</string>
+    <string name="title_activity_cell_pedido">CellPedido</string>
+
+</resources>
