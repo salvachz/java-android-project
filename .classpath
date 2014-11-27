@@ -20,5 +20,6 @@
 	<classpathentry kind="lib" path="/home/salvachz/workspace/java-android-project/assets/httpcore-4.3.3.jar"/>
 	<classpathentry kind="lib" path="/home/salvachz/workspace/java-android-project/assets/httpmime-4.3.6.jar"/>
 	<classpathentry kind="lib" path="/home/salvachz/workspace/java-android-project/assets/org.json-20120521.jar"/>
+	<classpathentry kind="lib" path="/home/salvachz/workspace/java-android-project/assets/universal-image-loader-1.9.3.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
