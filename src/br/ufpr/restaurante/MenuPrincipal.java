@@ -2,6 +2,7 @@ package br.ufpr.restaurante;
 
 import java.io.Serializable;
 import br.ufpr.restaurante.model.*;
+import br.ufpr.restaurante.thread.FinalizeProductThread;
 import br.ufpr.restaurante.thread.LoginThread;
 import br.ufpr.restaurante.thread.ProductThread;
 
@@ -33,12 +34,25 @@ public class MenuPrincipal extends Activity implements OnClickListener {
 		}
 	};
 	
+	private Handler handlerFinalize = new Handler(){
+		public void handleMessage(Message msg){
+			Intent it = new Intent(MenuPrincipal.this, ListaPedidos.class);
+			Bundle params = msg.getData();
+			List<Produto> finProd = (List<Produto>) params.getSerializable("products");
+			params.putSerializable("product", (Serializable) finProd);
+    		params.putInt("user", MenuPrincipal.this.user);
+    		it.putExtras(params);
+			startActivity(it);
+		}
+	};
+	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
-        this.user = extras.getInt("user");
+        if(this.user == null)
+        	this.user = Integer.parseInt(extras.getString("user"));
         setContentView(R.layout.activity_menu_principal);
         ProductThread productThread = new ProductThread("" , handlerGetProducts);
         productThread.start();
@@ -46,24 +60,19 @@ public class MenuPrincipal extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View view) {
+		Intent it;
+		Bundle params = new Bundle();
 		switch(view.getId()) {
 			case R.id.btnPedido:			
-				//prod.add(new Produto("Arroz", 5.50, R.drawable.logo, 1, 1));
-				Intent it = new Intent(MenuPrincipal.this, ListaProdutos.class); 
-				Bundle params = new Bundle();
+				it = new Intent(MenuPrincipal.this, ListaProdutos.class); 
         		params.putSerializable("product", (Serializable) this.product);
         		params.putInt("user", this.user);
         		it.putExtras(params);
 				startActivity(it);
 				break;
-			case R.id.btnPagar:
-				//pedido.add(new Produto("Bacon", 3.50, R.drawable.logo, 6, 2));
-				Intent intent = null;
-				intent = new Intent(this, ListaPedido.class); 
-				Bundle bundle = new Bundle();
-				//bundle.putSerializable("pedido", (Serializable) pedido);
-				intent.putExtras(bundle);
-				startActivity(intent);
+			case R.id.btnPagar: 
+				FinalizeProductThread finalizeProductThread = new FinalizeProductThread(this.user.toString() , handlerFinalize);
+		        finalizeProductThread.start();
 				break;
 		}
 	}

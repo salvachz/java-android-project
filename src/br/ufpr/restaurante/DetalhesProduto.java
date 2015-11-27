@@ -72,7 +72,7 @@ public class DetalhesProduto extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		qtd = (EditText) findViewById(R.id.fieldQtd);
 		
-		Integer quantidade = Integer.getInteger(qtd.getText().toString());
+		Integer quantidade = Integer.parseInt(qtd.getText().toString());
 		Log.i("ha", "quantidade vai!ela vale:"+quantidade);
 		Integer product_id = produto.getId();
 		

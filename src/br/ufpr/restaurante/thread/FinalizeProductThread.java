@@ -1,38 +1,42 @@
 package br.ufpr.restaurante.thread;
+
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import br.ufpr.restaurante.WebService;
+import br.ufpr.restaurante.model.Produto;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import br.ufpr.restaurante.model.*;
 
-public class ProductThread extends Thread{
-			private String filter;
+public class FinalizeProductThread extends Thread{
+			private String user;
 			private Handler handler;
 			
-			public ProductThread (String filter, Handler handler){
-				this.filter = filter;
+			public FinalizeProductThread (String user, Handler handler){
+				this.user = user;
 				this.handler = handler;
 			}
 			
 			public void run(){
-				Log.e("ha","chamou ProductThread");
+				Log.i("ha","run in LoginThread");
 				WebService ws = new WebService("http://salvachz.com.br/restaurante/");
-				Map params = new HashMap(); 
-				if(!this.filter.equals(""))
-					params.put("filter", this.filter);
-				String result = ws.webGet("produtos.php", params);
+				Map<String,String> params = new HashMap<String,String>(); 
+				params.put("user", this.user);
+				Log.i("ha","doing webGet");
+				String result = ws.webGet("pedidos.php",params);
+				Log.i("ha","done webGet");
 				try{
 					JSONObject json = new JSONObject(result);
 					Bundle bundle = new Bundle();
@@ -47,7 +51,8 @@ public class ProductThread extends Thread{
 						String nome = product.getString("proName");
 						Double preco = product.getDouble("proValue");
 						String imgResource = product.getString("imgResource");
-						listProduct.add( new Produto(id, nome, preco, imgResource, 0));
+						Integer count = product.getInt("count");
+						listProduct.add( new Produto(id, nome, preco, imgResource, count));
 					}
 					bundle.putSerializable("products", (Serializable) listProduct);
 					Message msg = new Message();

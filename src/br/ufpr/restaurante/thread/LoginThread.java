@@ -36,6 +36,7 @@ public class LoginThread extends Thread{
 					Bundle bundle = new Bundle();
 					bundle.putBoolean("status", json.getBoolean("status"));
 					bundle.putString("user", json.optString("user",""));
+					Log.e("ha","aqui no bundle vle: "+json.optString("user",""));
 					Message msg = new Message();
 					msg.setData(bundle);
 					Log.i("ha","run sending message");

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/varBkg"
+    >
+    
+    <ListView
+        android:id="@+id/list_pedidos"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/btn_dinheiro"
+        android:layout_height="wrap_content" >
+    </ListView>
+   
+    <Button
+        android:id="@+id/btn_dinheiro"
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_below="@+id/btn_debito"
+        android:text="dinheiro"
+        android:onClick="onClick" />
+    
+    <Button
+        android:id="@+id/btn_debito"
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_below="@+id/btn_credito"
+        android:text="debito"
+        android:onClick="onClick" />
+    
+    <Button
+        android:id="@+id/btn_credito"
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:text="credito"
+        android:onClick="onClick" />
+    
+</RelativeLayout>

@@ -177,7 +177,6 @@ public class WebService{
         
         
         try {
-        	Log.e("sim", response.toString());
             response = httpClient.execute(httpPost);
             
         } catch (Exception e) {

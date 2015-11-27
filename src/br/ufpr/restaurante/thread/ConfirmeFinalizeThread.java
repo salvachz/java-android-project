@@ -1,11 +1,12 @@
 package br.ufpr.restaurante.thread;
-
-
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONObject;
 
 import br.ufpr.restaurante.WebService;
 
@@ -14,37 +15,31 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
-public class RequestProductThread extends Thread{
-			private Integer user;
-			private Integer product_id;
-			private Integer count;
+
+public class ConfirmeFinalizeThread extends Thread{
+			private String user;
+			private String passwd;
+			private String payment;
 			private Handler handler;
-			
-			public RequestProductThread (Integer user_id, Integer product_id, Integer count, Handler handler){
-				this.user = user_id;
-				this.product_id = product_id;
-				this.count = count;
+			public ConfirmeFinalizeThread (String user, String payment, Handler handler){
+				this.user = user;
+				this.passwd = passwd;
+				this.payment = payment;
 				this.handler = handler;
 			}
 			
 			public void run(){
-				Log.i("ha","chamou requestProduct");
+				Log.i("ha","run in LoginThread");
 				WebService ws = new WebService("http://salvachz.com.br/restaurante/");
-				Log.i("ha","vai montar parametros");
 				List<NameValuePair> params = new ArrayList<NameValuePair>(); 
 				Log.i("ha","criou variavel, user id eh "+user.toString());
 				params.add(new BasicNameValuePair("user", this.user.toString()));
-				params.add(new BasicNameValuePair("product", this.product_id.toString()));
-				params.add(new BasicNameValuePair("count", this.count.toString()));
-				
-				Log.i("ha","vai fazer o POST");
-				
-				ws.doPost("pedidos.php", params);
-				
-				Log.i("ha","fez o POST o/");
+				params.add(new BasicNameValuePair("payment", this.payment));
+				Log.i("ha","doing webGet");
+				String result = ws.doPost("finalizar.php",params);
+				Log.i("ha","done webGet");
 				Bundle bundle = new Bundle();
-				bundle.putString("user", user.toString());
-				Log.i("ha","fechou requestProduct com sucesso");
+				bundle.putString("user", this.user);
 				Message msg = new Message();
 				msg.setData(bundle);
 				this.handler.sendMessage(msg);

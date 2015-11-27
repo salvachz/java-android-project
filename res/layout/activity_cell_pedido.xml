@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/varBkg" >
@@ -7,27 +7,29 @@
         android:id="@+id/img"
         android:layout_width="80dp"
         android:layout_height="80dp" />
-   
+
     <TextView
         android:id="@+id/nome"
-        android:layout_width="300dp"
-        android:layout_height="20dp" />
+        android:layout_toRightOf="@id/img"
+        android:layout_width="100dp"
+        android:textColor="#000"
+        android:layout_height="20dp"
+        />
+
 
     <TextView
         android:id="@+id/precoUnit"
-        android:layout_width="80dp"
-        android:layout_height="20dp"
-        android:layout_below="@+id/nome" />
-    
+        android:layout_width="50dp"
+        android:layout_alignLeft="@id/nome"
+        android:layout_below="@+id/nome"
+        android:textColor="#000"
+        android:layout_height="20dp" />
     <TextView
-        android:id="@+id/qtd"
-        android:layout_width="80dp"
-        android:layout_height="20dp"
-        android:layout_below="@+id/precoUnit" />
-    <TextView
-        android:id="@+id/precoTot"
-        android:layout_width="80dp"
-        android:layout_height="20dp"
-        android:layout_below="@+id/qtd" />
+        android:id="@+id/qtd_b"
+        android:layout_toRightOf="@id/nome"
+        android:layout_width="100dp"
+        android:textColor="#000"
+        android:layout_height="20dp" />
 
-</LinearLayout>
+
+</RelativeLayout>
